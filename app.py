@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-my_client = MongoClient("local host", 27017)
+my_client = MongoClient("localhost", 27017)
 my_db = my_client["mydatabase"]
 my_collection = my_db["mycollection"]
 
@@ -38,12 +38,6 @@ def transactions():
     
     transactions = list(my_collection.find({}, {'_id': 0}))
     return render_template('transactions.html')
-
-@app.route('/api/transactions', methods=['GET'])
-def api_transactions():
-    
-    transactions = list(my_collection.find({}, {'_id': 0}))
-    return (transactions)
 
 
 app.run(debug=True)
